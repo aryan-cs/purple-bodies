@@ -2,7 +2,6 @@ function Body (x, y, z) {
     
     this.pos = createVector(x, y, z);
     this.vel = createVector(0, 0, 0);
-    this.model = blockModel;
     this.scale = random(4, 6);
     this.speed = 200 * (2 / this.scale);
     this.color = presetPurples[floor(random(0, presetPurples.length))];
@@ -70,7 +69,8 @@ Body.prototype.render = function () {
     fill(this.color);
     noStroke();
     scale(this.scale);
-    model(this.model);
+    // texture(overlayImage);
+    model(bodyModel);
 
     pop();
 

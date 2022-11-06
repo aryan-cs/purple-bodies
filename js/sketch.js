@@ -1,7 +1,8 @@
 function preload() {
   
   defaultFont = loadFont("assets/fonts/default.ttf");
-  blockModel = loadModel("assets/models/body.obj");
+  bodyModel = loadModel("assets/models/body.obj");
+  overlayImage = loadImage("assets/images/overlay.png");
 
 }
 
@@ -9,7 +10,7 @@ function setup () {
 
   canvas = createCanvas(WIDTH, HEIGHT, WEBGL);
 
-  for (var b = 0; b < 15; b++) { bodies.push(new Body(random(-WIDTH, WIDTH), random(-HEIGHT, HEIGHT), universalZ)); }
+  for (var b = 0; b < 15; b++) { bodies.push(new Body(random(-WIDTH, WIDTH), random(-HEIGHT, HEIGHT), universalZ + random(-400, 400))); }
 
   document.getElementById("defaultCanvas0").addEventListener("mouseenter", function() { mousing = true; });
   document.getElementById("defaultCanvas0").addEventListener("mouseout", function() { mousing = false; });

@@ -1,9 +1,11 @@
-function Body (x, y, z) {
+function Body (x, y, z, type) {
     
     this.pos = createVector(x, y, z);
     this.vel = createVector(0, 0, 0);
-    this.scale = random(4, 6);
+    this.model = type;
+    this.scale = random(1, 6);
     this.speed = 200 * (2 / this.scale);
+    this.angularVel = random(0.001, 0.01);
     this.color = presetPurples[floor(random(0, presetPurples.length))];
 
     mouseVector = createVector(0, 0, universalZ);
@@ -63,14 +65,28 @@ Body.prototype.render = function () {
 
     translate(this.pos.x, this.pos.y, this.pos.z);
 
-    rotateX(frameCount * 0.01);
-    rotateY(frameCount * 0.01);
+    rotateX(frameCount * this.angularVel);
+    rotateY(frameCount * this.angularVel);
 
-    fill(this.color);
-    noStroke();
     scale(this.scale);
     // texture(overlayImage);
-    model(bodyModel);
+
+    if (WIREFRAME_MODE) { 
+        
+        noFill();
+        stroke(this.color);
+        strokeWeight(0.4 * sqrt(this.scale));
+        model(this.model);
+
+    }
+
+    else {
+
+        fill(this.color);
+        noStroke();
+        model(sphere);
+
+    }
 
     pop();
 

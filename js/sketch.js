@@ -1,8 +1,14 @@
 function preload() {
   
   defaultFont = loadFont("assets/fonts/default.ttf");
-  bodyModel = loadModel("assets/models/body.obj");
+  sphere = loadModel("assets/models/smooth-sphere.obj");
   overlayImage = loadImage("assets/images/overlay.png");
+
+  for (var m = 0; m < bodyTypes.length; m++) {
+
+    bodyModels.push(loadModel(bodyTypes[m]));
+
+  }
 
 }
 
@@ -10,7 +16,7 @@ function setup () {
 
   canvas = createCanvas(WIDTH, HEIGHT, WEBGL);
 
-  for (var b = 0; b < 15; b++) { bodies.push(new Body(random(-WIDTH, WIDTH), random(-HEIGHT, HEIGHT), universalZ + random(-400, 400))); }
+  for (var b = 0; b < 30; b++) { bodies.push(new Body(random(-WIDTH, WIDTH), random(-HEIGHT, HEIGHT), universalZ + random(-800, 800), bodyModels[floor(random(0, bodyModels.length))])); }
 
   document.getElementById("defaultCanvas0").addEventListener("mouseenter", function() { mousing = true; });
   document.getElementById("defaultCanvas0").addEventListener("mouseout", function() { mousing = false; });

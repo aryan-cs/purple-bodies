@@ -89,7 +89,7 @@ const ACCENT_2 = getComputedStyle(document.querySelector(":root")).getPropertyVa
 // other vars
 var bodies = [];
 var universalZ = 0;
-var mousing = false, WIREFRAME_MODE = true;
+var mousing = false, WIREFRAME_MODE = false;
 
 var presetPurples = [
 

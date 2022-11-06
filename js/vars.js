@@ -13,8 +13,8 @@ window.addEventListener("resize", function (ignored) {
 }, true);
 
 // site
-var title = "Purple Bodies";
-var version = "version 0.1.3";
+var title = "purple-bodies";
+var version = "version 1.0.2";
 
 window.onload = function () { document.title = title; document.getElementById("title").innerHTML = title + "  <span style=\"font-size: 30px;\"> " + version + "<\span>"; }
 

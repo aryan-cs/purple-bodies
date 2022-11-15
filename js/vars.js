@@ -7,8 +7,8 @@ const WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
 function limit (value, min, max) { return Math.min(Math.max(value, min), max); }
 
 window.addEventListener("resize", function (ignored) {
-
-  if (VARIABLE_SCALING) { resizeCanvas(Math.floor(limit(window.innerWidth / SCALE, 1000, WIDTH)), Math.floor(limit(window.innerWidth / SCALE, 580, HEIGHT))); }
+    
+  resizeCanvas(Math.floor(window.innerWidth, window.innerWidth));
 
 }, true);
 
@@ -16,7 +16,7 @@ window.addEventListener("resize", function (ignored) {
 var title = "purple-bodies";
 var version = "version 1.0.3";
 
-window.onload = function () { document.title = title; document.getElementById("title").innerHTML = title + "  <span style=\"font-size: 30px;\"> " + version + "<\span>"; }
+// window.onload = function () { document.title = title; document.getElementById("title").innerHTML = title + "  <span style=\"font-size: 30px;\"> " + version + "<\span>"; }
 
 function createInputAndButton (buttonMessage, createMessage) {
 
@@ -89,7 +89,7 @@ const ACCENT_2 = getComputedStyle(document.querySelector(":root")).getPropertyVa
 // other vars
 var bodies = [];
 var universalZ = 0;
-var mousing = false, WIREFRAME_MODE = true;
+var mousing = false, WIREFRAME_MODE = true, ELASTICITY_ISH = 0.002, GRAVITY = 0.001;
 
 var presetPurples = [
 
@@ -105,9 +105,11 @@ var presetPurples = [
 var bodyTypes = [
 
   // "assets/models/cone.obj",
-  "assets/models/cube.obj",
-  "assets/models/pyramid.obj",
-  "assets/models/rough-sphere.obj"
+  // "assets/models/cube.obj",
+  // "assets/models/pyramid.obj",
+  "assets/models/rough-sphere.obj",
+  // "assets/models/less-smooth-sphere.obj",
+  // "assets/models/smooth-sphere.obj",
 
 ];
 

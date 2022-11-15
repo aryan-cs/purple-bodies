@@ -3,9 +3,9 @@ function Body (x, y, z, type) {
     this.pos = createVector(x, y, z);
     this.vel = createVector(0, 0, 0);
     this.model = type;
-    this.scale = random(1, 6);
-    this.speed = 200 * (2 / this.scale);
-    this.angularVel = random(0.001, 0.01);
+    this.scale = random(0.75, 1);
+    this.speed = 100 * (2 / this.scale);
+    this.angularVel = random(0.005, 0.025);
     this.color = presetPurples[floor(random(0, presetPurples.length))];
 
     mouseVector = createVector(0, 0, universalZ);
@@ -14,14 +14,14 @@ function Body (x, y, z, type) {
 
 Body.prototype.update = function () {
 
-    if (mousing) { mouseVector = createVector(mouseX - WIDTH / 2, mouseY - HEIGHT / 2, universalZ); }
+    if (mousing) { mouseVector = createVector(mouseX - (WIDTH / 2), mouseY - (HEIGHT / 2), universalZ); }
 
-    else { mouseVector = createVector(0, 0, universalZ); }
+    else { mouseVector = createVector(sin((frameCount) * (WIDTH / 2)), 0, universalZ); }
 
     mouseVector.sub(this.pos);
     mouseVector.normalize();
     mouseVector.mult(this.speed);
-    this.vel.lerp(mouseVector, 0.001);
+    this.vel.lerp(mouseVector, GRAVITY);
 
     var seperation = createVector(0, 0, 0);
     var seperationCount = 0;
@@ -53,7 +53,7 @@ Body.prototype.update = function () {
 
     seperation.mult(this.speed);
 
-    this.vel.lerp(seperation, 0.01);
+    this.vel.lerp(seperation, ELASTICITY_ISH);
 
     this.pos.add(this.vel);
 
@@ -75,7 +75,7 @@ Body.prototype.render = function () {
         
         noFill();
         stroke(this.color);
-        strokeWeight(0.4 * sqrt(this.scale));
+        strokeWeight(0.6 * sqrt(this.scale));
         model(this.model);
 
     }

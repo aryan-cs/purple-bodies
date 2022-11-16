@@ -3,20 +3,22 @@ function Body (x, y, z, type) {
     this.pos = createVector(x, y, z);
     this.vel = createVector(0, 0, 0);
     this.model = type;
-    this.scale = random(0.75, 1);
-    this.speed = 100 * (2 / this.scale);
+
+    if (ELECTRON_MODE) { this.scale = random(1.75, 2); } else { this.scale = random(2, 5); }
+
+    this.speed = 150 * (2 / this.scale);
     this.angularVel = random(0.005, 0.025);
     this.color = presetPurples[floor(random(0, presetPurples.length))];
 
-    mouseVector = createVector(0, 0, universalZ);
+    mouseVector = createVector(window.innerWidth / 2, window.innerHeight / 2, universalZ);
 
 }
 
 Body.prototype.update = function () {
 
-    if (mousing) { mouseVector = createVector(mouseX - (WIDTH / 2), mouseY - (HEIGHT / 2), universalZ); }
+    if (mousing) { mouseVector = createVector(mouseX - (window.innerWidth / 2), mouseY - (window.innerHeight / 2), universalZ); }
 
-    else { mouseVector = createVector(sin((frameCount) * (WIDTH / 2)), 0, universalZ); }
+    else { mouseVector = createVector(sin(frameCount / 200) * (window.innerWidth / 4), 0, universalZ); }
 
     mouseVector.sub(this.pos);
     mouseVector.normalize();
@@ -32,7 +34,7 @@ Body.prototype.update = function () {
 
             var distance = p5.Vector.dist(this.pos, body.pos);
 
-            if (distance < 25 * this.scale) {
+            if (distance < 20 * this.scale) {
 
                 var difference = p5.Vector.sub(this.pos, body.pos);
 
@@ -64,29 +66,13 @@ Body.prototype.render = function () {
     push();
 
     translate(this.pos.x, this.pos.y, this.pos.z);
-
     rotateX(frameCount * this.angularVel);
     rotateY(frameCount * this.angularVel);
-
     scale(this.scale);
-    // texture(overlayImage);
-
-    if (WIREFRAME_MODE) { 
-        
-        noFill();
-        stroke(this.color);
-        strokeWeight(0.6 * sqrt(this.scale));
-        model(this.model);
-
-    }
-
-    else {
-
-        fill(this.color);
-        noStroke();
-        model(sphere);
-
-    }
+    noFill();
+    stroke(this.color);
+    strokeWeight(0.3 * sqrt(this.scale));
+    model(this.model);
 
     pop();
 

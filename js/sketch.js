@@ -12,12 +12,11 @@ function preload() {
 
 function setup () {
 
-  canvas = createCanvas(WIDTH, HEIGHT, WEBGL);
+  canvas = createCanvas(window.innerWidth, window.innerHeight, WEBGL);
 
-  for (var b = 0; b < WIDTH / 100; b++) {
+  for (var b = 0; b < window.innerWidth / 100; b++) {
     
-    // bodies.push(new Body(random(-WIDTH, WIDTH), random(-HEIGHT, HEIGHT), universalZ + random(-800, 200), bodyModels[floor(random(0, bodyModels.length))]));
-    bodies.push(new Body(random(-WIDTH, WIDTH), random(-HEIGHT, HEIGHT), universalZ + random(-800, 200), bodyModels[b % bodyModels.length]));
+    bodies.push(new Body(random(-window.innerWidth, window.innerWidth), random(-window.innerHeight, window.innerHeight), universalZ + random(-200, 200), bodyModels[b % bodyModels.length]));
   
   }
 
@@ -28,17 +27,7 @@ function setup () {
 
 function draw () {
 
-  background("rgb(18, 18, 18)");
-
-  lighting();
-
+  background(BACKGROUND_COLOR);
   bodies.forEach(body => { body.update(); body.render(); });
-
-}
-
-function lighting () {
-
-  ambientLight(85);
-  directionalLight(255, 255, 255, 0, 0, -1);
 
 }

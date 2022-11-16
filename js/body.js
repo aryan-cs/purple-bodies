@@ -12,6 +12,10 @@ function Body (x, y, z, type) {
 
     mouseVector = createVector(window.innerWidth / 2, window.innerHeight / 2, universalZ);
 
+    mouseVector.x = window.innerWidth / 2;
+    mouseVector.y = window.innerHeight / 2;
+    mouseVector.z = universalZ;
+
 }
 
 Body.prototype.update = function () {

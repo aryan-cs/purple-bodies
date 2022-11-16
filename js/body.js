@@ -11,6 +11,7 @@ function Body (x, y, z, type) {
     this.color = presetPurples[floor(random(0, presetPurples.length))];
 
     mouseVector = createVector(window.innerWidth / 2, window.innerHeight / 2, universalZ);
+
     mouseVector.x = window.innerWidth / 2;
     mouseVector.y = window.innerHeight / 2;
     mouseVector.z = universalZ;
